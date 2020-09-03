@@ -1,5 +1,5 @@
 var lista = {}
-
+var flag = 0
 var itens = ["Elmo","Mana","Hp"]
 
 
@@ -106,7 +106,6 @@ function carregaDivs(prod = JSON.parse(localStorage['lista']) ){   //Recupera a 
 
 }
 function mostrarInv(){
-    localStorage["lista"] = JSON.stringify(lista); //Salvo a lista para recuperar na nova aba
     open("Inventário.html", "minhaJanela", "height=500,width=500")  //Abre a aba de inventário
     window.onload = carregaDivs()       //Carrega a função para preencher o inventário
 }
@@ -126,8 +125,11 @@ function abrirJanela() {
     }
   }
 
-function comprar(nome,invent = lista){
-    
+function comprar(nome, invent = lista){
+    if(flag > 0){       //Verifica Se é a primeira compra ou não
+        invent = JSON.parse(localStorage['lista'])
+    }
+
     var quant = prompt("Digite a quantidade a ser comprada:")
     if(invent[nome] == undefined){      //Verifica se ele já foi criado ou não
         invent[nome] = Number(quant)
@@ -137,7 +139,8 @@ function comprar(nome,invent = lista){
    }
 
    alert(invent[nome])
-    //localStorage["lista"] = JSON.stringify(lista); //Salvo o array para recuperar na nova aba
+   flag +=1
+    localStorage["lista"] = JSON.stringify(invent); //Salvo o array para recuperar na nova aba
 }
 
 function playAudio(url,nome) {
