@@ -77,16 +77,21 @@ function carregaDivs(prod = JSON.parse(localStorage['lista']) ){   //Recupera a 
                 divisaoQuant.id = "texto"               //8
                 icone.addEventListener("click", function(){
 
-                    var confirma = confirm("Deseja excluir o item?")
+                    var quant = prompt("Quantos itens deseja excluir: ")
 
-                    if(confirma){
-                        var indice = this.id.substring(5,10)        //Pega o indice do item a ser excluido, tirando a inicial da id = "icone"
-                        var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
-                        var chaves = Object.keys(prod)                  //Pega as chaves de acesso
+                    var indice = this.id.substring(5,10)        //Pega o indice do item a ser excluido, tirando a inicial da id = "icone"
+                    var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
+                    var chaves = Object.keys(prod)                  //Pega as chaves de acesso
+
+                    if(quant >= prod[chaves[Number(indice)]]){
                         delete prod[chaves[Number(indice)]]             //Exclui a chave
-                        localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
-                        location.reload()
                     }
+                    else{
+                        prod[chaves[Number(indice)]] -= quant
+                    }
+                    
+                    localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
+                    location.reload()
 
 
                 })
