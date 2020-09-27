@@ -1,10 +1,8 @@
 body{
     background: rgb(36, 207, 230);
-    width: 500px;
-    height: 500px;
 }
 
-section#titulo{
+#titulo{
     cursor: url("Cursor.cur"),auto;
     position: relative;
     width: 354px;
@@ -16,14 +14,14 @@ section#titulo{
     text-align: center;
     }
 
-span#texto{
+[id*="texto"]{
     position: relative;
     top:-27px;
     left: 73px;
     bottom: 43px;
     
 }
-section#meusItens{
+#meusItens{
 
     cursor: url("Cursor.cur"),auto;
     /* Local dos itens */
@@ -31,7 +29,7 @@ section#meusItens{
     position: relative;
     width: 900px;
     height: 510px;
-    left: 250px;
+    left: 300px;
     right:29px;
     top: 70px;
 
@@ -57,3 +55,174 @@ section#meusItens{
     border-radius: 15px;
     margin: 13px;
 }
+
+#elip{
+    position: absolute;
+    width: 10.3221%;
+    height:21.41779%;
+    left: 0.79%;
+    top:1.2843%;
+    border-radius: 50%;
+    background: #daa520;
+    animation: efeito3 10s alternate infinite ease-in-out;
+ }
+@keyframes efeito3{
+    from{
+        filter: drop-shadow(0 0 0 #daa520);
+    }
+    to {
+        filter: drop-shadow(0 0 30px #daa520);
+    }
+} 
+
+
+#bordaC{
+    position: absolute;
+    width: 11%;
+    height:22.5%;
+    left: 0.5%;
+    top:0.9%;
+    border-radius: 50%;
+    background:  #bc5e00;
+ }
+
+#elip2{
+    position: absolute;
+    width: 8.63836%;
+    height: 18.70286%;
+    left: 0.69%;
+    top:1.2843%;
+    margin: 0.7% ;
+    background: #daa520;
+    border-radius: 50%;
+   
+}
+
+#retmana{
+    position: absolute;
+    width: 11.12737%;
+    height: 5.27903%;
+    top: 16.8%;
+    left: 10.2489%;
+    background: white;
+    display: flex;
+    clip-path: polygon(0 0, 100% 0%, 97% 100%, 0% 100%);
+}
+  
+#fotoP{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+
+}
+
+#rethp{
+    position: absolute;
+    width: 13.25036%;
+    height: 5.27903%;
+    left: 10.2489%;
+    top:9.98%;
+    background: white;
+    display: flex;
+    clip-path: polygon(0 0, 100% 0%, 97% 100%, 0% 100%);
+}
+
+#progress-bar{
+    position: absolute;
+    font-family: fantasy;
+    font-style: oblique;
+    height: 100%;
+    width: 0%;
+    background-color: white;
+    animation: efeito 2s alternate infinite ease-in-out;
+    
+ }
+@keyframes efeito{
+    from{
+        filter: drop-shadow(0 0 0 #00FF00);
+    }
+    to {
+        filter: drop-shadow(0 0 30px #00FF00);
+    }
+} 
+  
+#rethpfundo{
+    position: absolute;
+    width: 19.10688%;
+    height: 6.78733%;
+    left:4.83162%;
+    top:8.98%;
+    background: #daa520;
+    clip-path: polygon(0 0, 100% 0%, 97% 100%, 0% 100%);
+
+}
+
+#bordaH{
+    position: absolute;
+    width: 19.10688%;
+    height: 7.6%;
+    left:5.1%;
+    top:8.5%;
+    background: #bc5e00;
+    clip-path: polygon(0 0, 100% 0%, 97% 100%, 0% 100%);
+
+}
+
+#retmanafundo{
+        
+    position: absolute;
+    width: 16.47144%;
+    height: 6.78733%;
+    top: 15.8%;
+    left: 5.34407%;
+    background: #daa520;
+    clip-path: polygon(0 0, 100% 0%, 97% 100%, 0% 100%);
+}
+
+
+#bordaM{
+        
+    position: absolute;
+    width: 16.47144%;
+    height: 7.5%;
+    top: 15.8%;
+    left: 5.6%;
+    background: #bc5e00;
+    clip-path: polygon(0 0, 100% 0%, 97% 100%, 0% 100%);
+}
+
+#progress-bar2{
+    position: absolute;
+    font-family: fantasy;
+    font-style: oblique;
+    height: 100%;
+    width: 0%;
+    background-color: white;
+    animation: efeito2 3s alternate infinite ease-in-out;
+ }
+@keyframes efeito2{
+    from{
+        filter: drop-shadow(0 0 0 blue);
+    }
+    to {
+        filter: drop-shadow(0 0 30px blue);
+    }
+}
+
+#vida{
+    position: absolute;
+    width: 60px;
+    height:50px;
+    top:10%;
+    left:50%;
+}
+
+#mana{
+    position: absolute;
+    width: 60px;
+    height:50px;
+    top:20%;
+    left:50%;
+}
+

@@ -1,9 +1,11 @@
 var lista = {}
 var flag = 0
+var flagHp = 0
+var flagMana = 0
 var itens = ["Elmo","Mana","Hp"]
-
-
 window.onload = imprimirImagens()
+
+
 function abrirTelaAdd(){
 
     const telaProduto = document.getElementById("telaPro")
@@ -50,8 +52,14 @@ class Gerente{
 
 }
 
-function carregaDivs(prod = JSON.parse(localStorage['lista']) ){   //Recupera a lista salva
-
+function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a lista salva
+    /* var barraHp = document.getElementById("progress-bar")
+    var barraMana = document.getElementById("progress-bar2")
+    alert(flagH) 
+    if(flagHp > 0){
+        var barra = JSON.parse(localStorage["Hp"])
+        barraHp.innerHTML = barra
+    } */
     var valores = Object.keys(prod)         //Pega as chaves de acessos da lista
     var tamanhoBag = valores.length 
     var myItens = document.getElementById("meusItens")
@@ -64,6 +72,7 @@ function carregaDivs(prod = JSON.parse(localStorage['lista']) ){   //Recupera a 
             if(prod[valores[ind]] > 0){         //Verifica se a quantidade do item é maior que 0 para imprimi-lo
 
                 var divisaoQuant = document.createElement("span")   //Texto com o número de itens que comprou
+                divisaoQuant.id = "texto"+ind
                 var imagem = new Image()        //Criação de imagem 1
                 var icone = new Image()         //Icone X
                 icone.src = "iconeX.png"        //Atribuição de valores
@@ -73,8 +82,65 @@ function carregaDivs(prod = JSON.parse(localStorage['lista']) ){   //Recupera a 
                 imagem.height = 100             //4
                 imagem.src = valores[ind] + ".png"  //5
                 imagem.title = valores[ind]     //6
+                if(valores[ind] == "Hp"){
+                    divisao.addEventListener("dblclick", function(e){
+                        addVida()
+                        var ind = e.currentTarget.id
+                        var indice = ind.substring(4,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
+                        var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
+                        var chaves = Object.keys(prod)                  //Pega as chaves de acesso
+                        var pegaNo = document.getElementById(ind)
+                        var pegaId = pegaNo.children[1].id
+                        var quant = document.getElementById(pegaId).textContent - 1
+                        document.getElementById(pegaId).textContent = quant
+
+                        if(prod[chaves[Number(indice)]] - 1  == 0){
+                           
+                            delete prod[chaves[Number(indice)]]             //Exclui a chave
+                            location.reload()
+                            
+                        }
+                        else{
+                            prod[chaves[Number(indice)]] -= 1
+                        }
+                        
+                        
+                        localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
+                        
+                        })
+                }
+
+                else if(valores[ind] == "Mana"){
+                    divisao.addEventListener("dblclick", function(e){
+                        addMana()
+                        var ind = e.currentTarget.id
+                        var indice = ind.substring(4,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
+                        var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
+                        var chaves = Object.keys(prod)                  //Pega as chaves de acesso
+                        var pegaNo = document.getElementById(ind)
+                        var pegaId = pegaNo.children[1].id
+                        var quant = document.getElementById(pegaId).textContent - 1
+                        document.getElementById(pegaId).textContent = quant
+
+                        if(prod[chaves[Number(indice)]] - 1  == 0){
+                            
+                            delete prod[chaves[Number(indice)]]             //Exclui a chave
+                            location.reload()
+                            
+                        }
+                        else{
+                            prod[chaves[Number(indice)]] -= 1
+                        }
+                        
+                        
+                        localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
+                        
+                        }
+                    )
+                }
+
                 divisaoQuant.textContent = prod[valores[ind]]   //7
-                divisaoQuant.id = "texto"               //8
+                            //8
                 icone.addEventListener("click", function(){
 
                     var quant = prompt("Quantos itens deseja excluir: ")
@@ -105,8 +171,9 @@ function carregaDivs(prod = JSON.parse(localStorage['lista']) ){   //Recupera a 
     }
 
 }
+
 function mostrarInv(){
-    open("Inventário.html", "minhaJanela", "height=500,width=500")  //Abre a aba de inventário
+    open("Inventário.html", "minhaJanela")  //Abre a aba de inventário
     window.onload = carregaDivs()       //Carrega a função para preencher o inventário
 }
 
@@ -172,3 +239,98 @@ function imprimirImagens(prod = itens){
 
 
 }
+
+
+
+function addVida(){
+    if(flagHp > 0){
+
+    }
+    var barraVida = document.getElementById("rethp")
+    var tamanhoBV = parseFloat(window.getComputedStyle(barraVida).width)
+    var aumento = (tamanhoBV*10)/100
+    var bar = document.getElementById("progress-bar")
+    var barraAtual = parseFloat(window.getComputedStyle(bar).width)
+    barraAtual += aumento
+    var texto = "Vida"
+    flagHp = 1
+    if (barraAtual > tamanhoBV){
+        barraAtual = tamanhoBV
+    }
+
+    else{
+        var perct = porcentagem(tamanhoBV,barraAtual)
+        if(perct < 25){
+            bar.style.backgroundColor = "red"
+            
+        }
+        else if(perct < 50){
+            bar.style.backgroundColor = "#ff8c00"
+
+        }
+        else if(perct < 80){
+            bar.style.backgroundColor = "rgb(209, 231, 5)"
+
+        }
+        else{
+            bar.style.backgroundColor =  "#00FF00"   
+
+        }
+        localStorage["Hp"] = JSON.stringify(texto+" " + Math.round(perct) + "/100")
+        bar.innerHTML = texto +" " + Math.round(perct) +"/100"
+    }
+
+
+
+
+    bar.style.width = barraAtual +"px"
+}
+
+function addMana(){
+    var barraMana = document.getElementById("retmana")
+    var tamanhoBM = parseFloat(window.getComputedStyle(barraMana).width)
+    
+    var aumentoM = (tamanhoBM*10)/100
+    
+    var bar = document.getElementById("progress-bar2")
+    var barraAtual = parseFloat(window.getComputedStyle(bar).width)
+    barraAtual += aumentoM
+    var texto = "Mana"
+    if (barraAtual > tamanhoBM){
+        barraAtual = tamanhoBM
+    }
+
+    else{
+        var perct = porcentagem(tamanhoBM,barraAtual)
+        if(perct < 25){
+            bar.style.backgroundColor = "#B0C4DE"	
+            
+        }
+        else if(perct < 50){
+            bar.style.backgroundColor = "#ADD8E6"	
+
+        }
+        else if(perct < 80){
+            bar.style.backgroundColor =  "#00BFFF"   
+
+        }
+        else{
+            bar.style.backgroundColor =  "#0080FF"
+
+        }
+        bar.innerHTML = texto + " " + Math.round(perct) +"/100"
+    }
+
+
+
+
+    bar.style.width = barraAtual +"px"
+}
+
+function porcentagem(barraCompleta, barraAtual){
+    
+    var perc = (100 * barraAtual)/barraCompleta
+    return perc
+}
+
+ 
