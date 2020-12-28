@@ -193,21 +193,29 @@ function abrirJanela() {
   }
 
 function comprar(nome, invent = lista){
+
+    var quant = prompt("Digite a quantidade a ser comprada:")
+    if(Number(quant) > 0){
     if(flag > 0){       //Verifica Se é a primeira compra ou não
         invent = JSON.parse(localStorage['lista'])
     }
 
-    var quant = prompt("Digite a quantidade a ser comprada:")
+    
     if(invent[nome] == undefined){      //Verifica se ele já foi criado ou não
         invent[nome] = Number(quant)
     }
     else{
         invent[nome] += Number(quant)       //Cria um objeto
    }
-
-   alert(invent[nome])
+   
+   var imageConfirm = document.getElementById("confirm")
+   imageConfirm.style.visibility = "visible"
+   imageConfirm.addEventListener("click", function(){
+       document.getElementById("confirm").style.visibility = "hidden"
+   })
    flag +=1
     localStorage["lista"] = JSON.stringify(invent); //Salvo o array para recuperar na nova aba
+}
 }
 
 function playAudio(url,nome) {

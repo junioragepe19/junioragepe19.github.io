@@ -1,64 +1,78 @@
 body{
     cursor: url("Cursor2.cur"),auto;
     position: relative;
-    width: 1440px;
-    height: 1024px;
-
+    width: 1300px;
+    height: 950px;
+    
+    
 /* Green 1 */
-
 background: #219653; }
 
+img#confirm{
+    visibility: hidden;
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top:30%;
+    left: 50%;
+}
 section#loja{
 
     /* Nome da loja */
     position: relative;
-    width: 354px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
     height: 107px;
-    left: 543px;
-    top: 89px;
-    background: #3F9C64;
-    border-radius: 15px;
     text-align: center;
     }
 
 p#titulo{
     /* nome loja */
 
-font-family: Arial;
+font-family: fantasy;
 font-style: normal;
 font-weight: normal;
 font-size: 64px;
 line-height: 75px;
+-webkit-text-stroke-width: 2px;
+-webkit-text-stroke-color: #000;
 
-color: #000000;
-
-}
-
+color: white;
+animation: efeito3 10s alternate infinite ease-in-out;
+ }
+@keyframes efeito3{
+    from{
+        filter: drop-shadow(0 0 0 #18472d);
+    }
+    to {
+        filter: drop-shadow(0 0 30px #18472d);
+    }
+} 
 
 section#itens{
 
     cursor: url("Cursor.cur"),auto;
     /* Local dos itens */
-
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
     width: 1200px;
     height: 666px;
-    left: 29px;
-    right:29px;
-    top: 130px;
 
-background: rgba(196, 196, 196, 0.69);
+background: #65d391;
 border-radius: 10px;}
 
 p#invet{
 
     /* Nome inventario */
-
-    font-family: Arial;
+    font-family: fantasy;
     font-style: normal;
     font-weight: normal;
     font-size: 36px;
-    color:rgb(204, 20, 20);
+    color:white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #000;
 }
 
 button#inventario{
@@ -68,8 +82,8 @@ button#inventario{
     position: relative;
     width: 282px;
     height: 65px;
-    left: 950px;
-    top: 150px;
+    left: 1015px;
+    top: 1%;
     text-align: center;
     display: flex;                  /* Centralizar nome */
     justify-content: center;        /* Centralizar nome */   
@@ -80,19 +94,22 @@ button#inventario{
 
 button#gerente{
     /* Botão Gerente */
+    color: white;
+    font-family: fantasy;
     position: relative;
     width: 282px;
     height: 65px;
-    left: 950px;
-    top: 100px;
+    left: 970px;
+    top: -1%;
     font-size: 36px;
-    background: rgb(12, 69, 155);
+    background: #18472d;
     cursor: url("Cursor2.cur"),auto;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 0;
+    border-radius: 100px;
 }
 
 img#mochila{
