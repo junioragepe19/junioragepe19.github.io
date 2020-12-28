@@ -83,7 +83,7 @@ function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a l
                 imagem.src = valores[ind] + ".png"  //5
                 imagem.title = valores[ind]     //6
                 if(valores[ind] == "Hp"){
-                    divisao.addEventListener("dblclick", function(e){
+                    divisao.addEventListener(("dblclick" || "touchend"), function(e){
                         addVida()
                         var ind = e.currentTarget.id
                         var indice = ind.substring(4,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
