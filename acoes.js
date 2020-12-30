@@ -82,7 +82,7 @@ function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a l
                 imagem.height = 100             //4
                 imagem.src = valores[ind] + ".png"  //5
                 imagem.title = valores[ind]     //6
-                imagem.id = "image"
+                imagem.id = "image"+ind
                 if(valores[ind] == "Hp"){
                     imagem.addEventListener("dblclick", function(e){
                         addVida()
