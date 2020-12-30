@@ -108,6 +108,32 @@ function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a l
                         localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
                         
                         })
+
+                        divisao.addEventListener("touchend", function(e){
+                            addVida()
+                            var ind = e.currentTarget.id
+                            var indice = ind.substring(4,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
+                            var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
+                            var chaves = Object.keys(prod)                  //Pega as chaves de acesso
+                            var pegaNo = document.getElementById(ind)
+                            var pegaId = pegaNo.children[1].id
+                            var quant = document.getElementById(pegaId).textContent - 1
+                            document.getElementById(pegaId).textContent = quant
+    
+                            if(prod[chaves[Number(indice)]] - 1  == 0){
+                               
+                                delete prod[chaves[Number(indice)]]             //Exclui a chave
+                                location.reload()
+                                
+                            }
+                            else{
+                                prod[chaves[Number(indice)]] -= 1
+                            }
+                            
+                            
+                            localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
+                            
+                            })
                 }
 
                 else if(valores[ind] == "Mana"){
