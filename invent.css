@@ -14,11 +14,11 @@ body{
     text-align: center;
     }
 
-
 [id*="texto"]{
+
     position: relative;
     top:-27px;
-    left: 73px;
+    left: 76px;
     bottom: 43px;
     
 }
@@ -240,3 +240,15 @@ h2{
     left:50%;
 }
 
+@media (max-width: 700px) {
+
+    #progress-bar {
+     font-size: 8px;
+    }
+
+    #progress-bar2 {
+        font-size: 8px;
+       }
+
+    
+    }   
