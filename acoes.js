@@ -78,22 +78,24 @@ function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a l
                 icone.src = "iconeX.png"        //Atribuição de valores
                 icone.id = "icone"+ind             //2
                 icone.title = "Excluir"         //3
-                imagem.width = 100              //3
+                imagem.width = 100             //3
                 imagem.height = 100             //4
                 imagem.src = valores[ind] + ".png"  //5
                 imagem.title = valores[ind]     //6
+                imagem.id = "image"
                 if(valores[ind] == "Hp"){
-                    divisao.addEventListener("dblclick", function(e){
+                    imagem.addEventListener("dblclick", function(e){
                         addVida()
                         var ind = e.currentTarget.id
-                        var indice = ind.substring(4,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
                         var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
                         var chaves = Object.keys(prod)                  //Pega as chaves de acesso
-                        var pegaNo = document.getElementById(ind)
+                        var pegaNo = document.getElementById(ind).parentNode
                         var pegaId = pegaNo.children[1].id
                         var quant = document.getElementById(pegaId).textContent - 1
+                        var aux = pegaNo.children[2].id
+                        var indice = aux.substring(5,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
                         document.getElementById(pegaId).textContent = quant
-
+                        
                         if(prod[chaves[Number(indice)]] - 1  == 0){
                            
                             delete prod[chaves[Number(indice)]]             //Exclui a chave
@@ -109,15 +111,16 @@ function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a l
                         
                         })
 
-                        divisao.addEventListener("touchend", function(e){
+                        imagem.addEventListener("touchend", function(e){
                             addVida()
                             var ind = e.currentTarget.id
-                            var indice = ind.substring(4,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
                             var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
                             var chaves = Object.keys(prod)                  //Pega as chaves de acesso
-                            var pegaNo = document.getElementById(ind)
+                            var pegaNo = document.getElementById(ind).parentNode
                             var pegaId = pegaNo.children[1].id
                             var quant = document.getElementById(pegaId).textContent - 1
+                            var aux = pegaNo.children[2].id
+                            var indice = aux.substring(5,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
                             document.getElementById(pegaId).textContent = quant
     
                             if(prod[chaves[Number(indice)]] - 1  == 0){
@@ -137,15 +140,45 @@ function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a l
                 }
 
                 else if(valores[ind] == "Mana"){
-                    divisao.addEventListener("dblclick", function(e){
+                    imagem.addEventListener("dblclick", function(e){
                         addMana()
                         var ind = e.currentTarget.id
                         var indice = ind.substring(4,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
                         var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
                         var chaves = Object.keys(prod)                  //Pega as chaves de acesso
-                        var pegaNo = document.getElementById(ind)
+                        var pegaNo = document.getElementById(ind).parentNode
                         var pegaId = pegaNo.children[1].id
                         var quant = document.getElementById(pegaId).textContent - 1
+                        var aux = pegaNo.children[2].id
+                        var indice = aux.substring(5,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
+                        document.getElementById(pegaId).textContent = quant
+
+                        if(prod[chaves[Number(indice)]] - 1  == 0){
+                            
+                            delete prod[chaves[Number(indice)]]             //Exclui a chave
+                            location.reload()
+                            
+                        }
+                        else{
+                            prod[chaves[Number(indice)]] -= 1
+                        }
+                        
+                        
+                        localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
+                        
+                        }
+                    )
+
+                    imagem.addEventListener("touchend", function(e){
+                        addMana()
+                        var ind = e.currentTarget.id
+                        var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
+                        var chaves = Object.keys(prod)                  //Pega as chaves de acesso
+                        var pegaNo = document.getElementById(ind).parentNode
+                        var pegaId = pegaNo.children[1].id
+                        var quant = document.getElementById(pegaId).textContent - 1
+                        var aux = pegaNo.children[2].id
+                        var indice = aux.substring(5,10)        //Pega o indice do item a ser diminuido, tirando a inicial da id = "icone"
                         document.getElementById(pegaId).textContent = quant
 
                         if(prod[chaves[Number(indice)]] - 1  == 0){
@@ -167,26 +200,28 @@ function carregaDivs(prod = JSON.parse(localStorage['lista'])){   //Recupera a l
 
                 divisaoQuant.textContent = prod[valores[ind]]   //7
                             //8
-                icone.addEventListener("click", function(){
-
+                icone.addEventListener("click", function(e){
                     var quant = prompt("Quantos itens deseja excluir: ")
+                
+                    if(Number(quant) > 0){
+                        var indice = this.id.substring(5,10)        //Pega o indice do item a ser excluido, tirando a inicial da id = "icone"
+                        var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
+                        var chaves = Object.keys(prod)                  //Pega as chaves de acesso
 
-                    var indice = this.id.substring(5,10)        //Pega o indice do item a ser excluido, tirando a inicial da id = "icone"
-                    var prod = JSON.parse(localStorage['lista'])    //Recupera o objeto da memória
-                    var chaves = Object.keys(prod)                  //Pega as chaves de acesso
-
-                    if(quant >= prod[chaves[Number(indice)]]){
-                        delete prod[chaves[Number(indice)]]             //Exclui a chave
-                    }
-                    else{
-                        prod[chaves[Number(indice)]] -= quant
-                    }
+                        if(quant >= prod[chaves[Number(indice)]]){
+                            delete prod[chaves[Number(indice)]]             //Exclui a chave
+                        }
+                        else{
+                            prod[chaves[Number(indice)]] -= quant
+                        }
                     
-                    localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
-                    location.reload()
+                        localStorage["lista"] = JSON.stringify(prod); //Salvo a lista para recuperar na nova aba
+                        location.reload()
 
-
-                })
+                    }
+                    TouchEvent.stopPropagation()
+                        })
+                        
                 document.getElementById(divisao.id).appendChild(imagem)        //Adiciona a imagem na divisão
                 document.getElementById(divisao.id).appendChild(divisaoQuant)   //Adiciona o texto na divisão
                 document.getElementById(divisao.id).appendChild(icone)        //Adiciona a imagem na divisão
@@ -257,7 +292,7 @@ function imprimirImagens(prod = itens){
     var item = document.getElementById("itens")
     for(var ind = 0; ind < prod.length; ind++){     //Percorre a lista de itens
         var imagem = new Image()
-        imagem.src = prod[ind] + ".png"             
+        imagem.src = prod[ind] + ".png"            
         imagem.title = imagem.id = prod[ind]        //Cria uma imagem do item
         var divisao = document.createElement("figure")  
         divisao.id = "item1" + ind                  //id configurada da caixa do item
